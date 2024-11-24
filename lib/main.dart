@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'splash_screen.dart'; // Sesuaikan lokasi file splash_screen.dart
 
 void main() {
   runApp(const ECommerceApp());
@@ -15,10 +16,11 @@ class ECommerceApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Roboto',
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(), // SplashScreen menjadi halaman pertama
     );
   }
 }
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,11 +36,19 @@ class HomeScreen extends StatelessWidget {
         ),
         title: const Text("E-Commerce"),
         centerTitle: true,
-        actions: const [
-          Icon(Icons.notifications, size: 24),
-          SizedBox(width: 16),
-          Icon(Icons.shopping_cart, size: 24),
-          SizedBox(width: 16),
+        actions: [
+          const Icon(Icons.notifications, size: 24),
+          const SizedBox(width: 16),
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, size: 24),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen()),
+              );
+            },
+          ),
+          const SizedBox(width: 16),
         ],
       ),
       body: SingleChildScrollView(
@@ -51,7 +61,6 @@ class HomeScreen extends StatelessWidget {
             FreelancerList(),
             SectionTitle(title: "Top Services", onViewAll: () {}),
             const ServiceList(),
-            // Tambahkan komponen BestBookingSection di sini
             SectionTitle(title: "Best Booking", onViewAll: () {}),
             const BestBooking(),
             const BestBooking2(),
@@ -133,11 +142,11 @@ class DealSection extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const Text(
-                  "Diskon 50%",
+                  "Diskon 75%",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 const Text(
-                  "Dapatkan diskon spesial sebesar 50% dengan cara belanja sekarang.",
+                  "Dapatkan diskon spesial sebesar 75% dengan cara belanja sekarang.",
                   style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 10),
@@ -145,7 +154,7 @@ class DealSection extends StatelessWidget {
                   onPressed: () {},
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text("BELI SEKARANAG",
+                  child: const Text("BELI SEKARANG",
                       style: TextStyle(color: Colors.white)),
                 ),
               ],
@@ -257,28 +266,28 @@ class FreelancerCard extends StatelessWidget {
 class FreelancerList extends StatelessWidget {
   final List<Map<String, dynamic>> freelancers = [
     {
-      "name": "Refki",
-      "profession": "Youtuber",
+      "name": "Jeno",
+      "profession": "Idol",
       "rating": 4.9,
-      "image": "assets/images/Buy2.jpg"
+      "image": "assets/images/foto1.jpg"
     },
     {
-      "name": "Abdullah",
-      "profession": "Beautician",
+      "name": "Cha Eunwoo",
+      "profession": "Idol",
       "rating": 4.9,
-      "image": "assets/images/Buy3.jpg"
+      "image": "assets/images/foto2.jpg"
     },
     {
-      "name": "Rafli",
-      "profession": "Beautician",
+      "name": "Haechan",
+      "profession": "Idol",
       "rating": 4.9,
-      "image": "assets/images/Buy1.jpg"
+      "image": "assets/images/foto3.jpg"
     },
     {
-      "name": "Sultan",
-      "profession": "Content Creator",
+      "name": "Jaemin",
+      "profession": "Idol",
       "rating": 4.9,
-      "image": "assets/images/profile3.jpg"
+      "image": "assets/images/foto4.jpg"
     },
   ];
 
@@ -316,24 +325,24 @@ class ServiceList extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         ServiceCard(
-          imageUrl: 'assets/images/profile1.png',
-          name: 'Miss Zachary Will',
+          imageUrl: 'assets/images/profile1.jpg',
+          name: 'Gucci ',
           role: 'Beautician',
-          description: 'Doloribus saepe aut necessitatibus qui.',
+          description: 'Top Markotop.',
           rating: 4.9,
         ),
         ServiceCard(
           imageUrl: 'assets/images/profile2.jpg',
-          name: 'Miss Zachary Will',
+          name: 'Chanel',
           role: 'Beautician',
-          description: 'Doloribus saepe aut necessitatibus qui.',
+          description: 'Aenjeayyy.',
           rating: 4.9,
         ),
         ServiceCard(
           imageUrl: 'assets/images/profile5.jpg',
-          name: 'Miss Zachary Will',
+          name: 'Prada',
           role: 'Beautician',
-          description: 'Doloribus saepe aut necessitatibus qui.',
+          description: 'Kerennn Abiezzz.',
           rating: 4.9,
         ),
       ],
@@ -557,7 +566,7 @@ class BestBooking2 extends StatelessWidget {
         ),
         SizedBox(height: 16.0),
         BestBookingCard(
-          imageUrl: 'assets/images/profile1.png',
+          imageUrl: 'assets/images/profile1.jpg',
           profileUrl: 'assets/images/rafi.jpeg',
           name: 'Miss Zachary Will',
           role: 'Beautician',
@@ -724,7 +733,7 @@ class RecommendedWorkshopsPage extends StatelessWidget {
                     topRight: Radius.circular(12),
                   ),
                   child: Image.asset(
-                    'assets/images/Buy1.jpg', // Ganti dengan path gambar Anda
+                    'assets/images/profile4.png', // Ganti dengan path gambar Anda
                     height: 230,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -780,7 +789,7 @@ class RecommendedWorkshopsPage extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "Occaecati aut nam beatae quo non deserunt consequat.",
+                    "Kualitas terbaik untuk anda.",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 12),
@@ -807,6 +816,277 @@ class RecommendedWorkshopsPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CartItemActions extends StatelessWidget {
+  final int quantity;
+  final VoidCallback onAdd;
+  final VoidCallback onRemove;
+  final VoidCallback onDelete;
+
+  const CartItemActions({
+    super.key,
+    required this.quantity,
+    required this.onAdd,
+    required this.onRemove,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.remove),
+          onPressed: onRemove,
+        ),
+        Text(
+          '$quantity',
+          style: const TextStyle(fontSize: 16),
+        ),
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: onAdd,
+        ),
+        IconButton(
+          icon: const Icon(Icons.delete, color: Colors.red),
+          onPressed: onDelete,
+        ),
+      ],
+    );
+  }
+}
+
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  final List<Map<String, dynamic>> _cartItems = [
+    {
+      "name": "Watch",
+      "brand": "Rolex",
+      "price": 700,
+      "quantity": 0,
+      "image": "assets/images/buy1.jpg"
+    },
+    {
+      "name": "Bags",
+      "brand": "Hermes",
+      "price": 400,
+      "quantity": 0,
+      "image": "assets/images/buy2.jpg"
+    },
+    {
+      "name": "Hoodie",
+      "brand": "Puma",
+      "price": 75,
+      "quantity": 0,
+      "image": "assets/images/buy3.jpg"
+    },
+  ];
+
+  final double _discount = 4.0;
+  final double _deliveryCharge = 2.0;
+
+  double _calculateTotal() {
+    double subtotal = _cartItems.fold(
+        0, (sum, item) => sum + (item['price'] * item['quantity']));
+    return subtotal - _discount + _deliveryCharge;
+  }
+
+  void _processCheckout(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Checkout Berhasil'),
+          content: const Text(
+              'Terima kasih telah berbelanja! Pesanan Anda sedang diproses.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const HomeScreen(), // Kembali ke beranda
+                  ),
+                  (route) => false,
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Your Cart"),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: _cartItems.length,
+              itemBuilder: (context, index) {
+                final item = _cartItems[index];
+                return Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.shade300, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        blurRadius: 5.0,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          item['image'],
+                          width: 100, // Lebar gambar diper kecil
+                          height: 100, // Tinggi gambar diper kecil
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item['name'],
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${item['brand']} - \$${item['price']}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            CartItemActions(
+                              quantity: item['quantity'],
+                              onAdd: () {
+                                setState(() {
+                                  item['quantity']++;
+                                });
+                              },
+                              onRemove: () {
+                                setState(() {
+                                  if (item['quantity'] > 0) {
+                                    item['quantity']--;
+                                  }
+                                });
+                              },
+                              onDelete: () {
+                                setState(() {
+                                  _cartItems.removeAt(index);
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 5.0,
+                  offset: const Offset(0, -3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Subtotal:'),
+                    Text(
+                        '\$${_calculateTotal() - _deliveryCharge + _discount}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Discount:'),
+                    Text('-\$${_discount}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Delivery Charges:'),
+                    Text('\$${_deliveryCharge}'),
+                  ],
+                ),
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Total:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '\$${_calculateTotal()}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: _cartItems.isNotEmpty
+                      ? () {
+                          _processCheckout(context);
+                        }
+                      : null,
+                  child: const Text('Check Out'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
